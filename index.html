@@ -4,30 +4,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="h-screen bg-slate-900">
-    <div class="flex w-3/4 mx-auto bg-gray-100 mt-5">
-        <a href="./01_carousel/index.html"
-            class="block w-2/6 max-w-sm text-center p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                carousel
-            </h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">
-                HTML/CSS
-            </p>
-        </a>
-        <a href="./02_navbar/index.html"
-            class="block w-2/6 max-w-sm text-center p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
-            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">
-                navbar
-            </h5>
-            <p class="font-normal text-gray-700 dark:text-gray-400">
-                HTML/CSS
-            </p>
-        </a>
+    <h1 class="my-4 block w-full px-4 text-center text-4xl font-extrabold leading-none tracking-tight
+         text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+        UI collection
+    </h1>
+
+    <div class="flex w-3/4 mx-auto bg-gray-100 mt-5" x-data="uiList">
+        <template x-for="item in componentList" :key="item.id">
+            <a x-bind:href="'./' + item.url + '/index.html'"
+                class="block w-2/6 max-w-sm text-center p-6 bg-white border border-gray-200 rounded-lg shadow hover:bg-gray-100">
+                <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900" x-text="item.name"></h5>
+                <p class="font-normal text-gray-700 dark:text-gray-400" x-text="item.description"></p>
+            </a>
+        </template>
     </div>
+
+    <script>
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('uiList', () => ({
+                componentList: [
+                    { id: 1, name: 'Carousel', link: '01_carousel', description: 'HTML/CSS' },
+                    { id: 2, name: 'navbar', link: '02_navbar', description: 'HTML/CSS' },
+                ]
+            }))
+        })
+    </script>
 
 </body>
 
